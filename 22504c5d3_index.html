@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subham Kumar — Creative Digital Professional | Video Editor · Web Developer · Digital Marketer</title>
+<meta name="description" content="Subham Kumar — Creative Digital Professional. Video editing, web development, web design and digital marketing. Building digitally. Building physically.">
+<meta name="author" content="Subham Kumar">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Subham Kumar — Creative Digital Professional">
+<meta property="og:description" content="I create visual stories, digital experiences and growth-focused creative work.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1200&auto=format&fit=crop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='8' fill='%230a0a0b'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial Black, sans-serif' font-weight='900' fill='%23f4f4f5' text-anchor='middle'%3ESK%3C/text%3E%3C/svg%3E">
+
+<!-- Fonts: Clash Display (headlines) + Satoshi (body) + Space Mono (metadata) -->
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════════════════════════════════════════════════════════
+   SUBHAM KUMAR — PERSONAL PORTFOLIO
+   Dark luxury editorial system.
+   To update content: edit the SITE_DATA object in the <script> at bottom.
+   To replace images: swap the URLs in SITE_DATA.images.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --bg: #0a0a0b;
+  --bg-elev: #101012;
+  --bg-card: #141416;
+  --ink: #f4f4f5;
+  --ink-dim: #b4b4bb;
+  --ink-faint: #71717a;
+  --line: rgba(244,244,245,.12);
+  --line-soft: rgba(244,244,245,.07);
+  --accent: #8f81f8;          /* subtle purple */
+  --accent-soft: rgba(143,129,248,.14);
+  --font-display: 'Clash Display', 'Archivo', sans-serif;
+  --font-body: 'Satoshi', 'Inter', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --ease: cubic-bezier(.19,1,.22,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:#0a0a0b;}
+
+/* fine film-grain texture over everything */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+.wrap{width:min(1400px,100% - 2.5rem);margin-inline:auto;}
+.wrap-wide{width:min(1600px,100% - 2.5rem);margin-inline:auto;}
+
+/* ————— typographic primitives ————— */
+.display{
+  font-family:var(--font-display);
+  font-weight:500;
+  line-height:.94;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+}
+.mono-label{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.section-num{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.18em;
+  color:var(--accent);
+}
+.hairline{height:1px;background:var(--line);border:none;}
+
+/* ————— reveal-on-scroll ————— */
+.rv{opacity:0;transform:translateY(36px);transition:opacity 1s var(--ease),transform 1s var(--ease);}
+.rv.in{opacity:1;transform:none;}
+.rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}.rv-d3{transition-delay:.24s}
+.rv-d4{transition-delay:.32s}.rv-d5{transition-delay:.4s}.rv-d6{transition-delay:.48s}
+
+/* ═══════════════ NAV ═══════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 0;
+  transition:background .5s var(--ease),padding .5s var(--ease),border-color .5s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(10,10,11,.82);backdrop-filter:blur(14px);border-bottom-color:var(--line-soft);padding:.75rem 0;}
+.logo{font-family:var(--font-display);font-weight:600;font-size:1.35rem;letter-spacing:-.02em;}
+.logo span{color:var(--accent);}
+.nav-links{display:flex;gap:2.2rem;align-items:center;}
+.nav-links a{
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-dim);position:relative;transition:color .35s;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-5px;height:1px;width:0;
+  background:var(--accent);transition:width .45s var(--ease);
+}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line);padding:.55rem 1.1rem;border-radius:99px;color:var(--ink);
+  transition:background .4s,color .4s,border-color .4s;
+}
+.nav-cta:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+.burger{display:none;flex-direction:column;gap:6px;padding:.5rem;z-index:210;}
+.burger span{display:block;width:26px;height:1.5px;background:var(--ink);transition:transform .45s var(--ease),opacity .3s;}
+.burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+
+.mobile-menu{
+  position:fixed;inset:0;z-index:190;background:var(--bg);
+  display:flex;flex-direction:column;justify-content:center;padding:2.5rem;
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);
+}
+.mobile-menu.open{clip-path:inset(0 0 0 0);}
+.mobile-menu a{
+  font-family:var(--font-display);font-size:clamp(2.2rem,10vw,3.4rem);font-weight:500;
+  text-transform:uppercase;line-height:1.15;color:var(--ink-dim);
+  display:flex;align-items:baseline;gap:1rem;padding:.4rem 0;
+  transition:color .3s,transform .5s var(--ease),opacity .5s;
+  opacity:0;transform:translateY(24px);
+}
+.mobile-menu.open a{opacity:1;transform:none;}
+.mobile-menu.open a:nth-child(1){transition-delay:.15s}
+.mobile-menu.open a:nth-child(2){transition-delay:.22s}
+.mobile-menu.open a:nth-child(3){transition-delay:.29s}
+.mobile-menu.open a:nth-child(4){transition-delay:.36s}
+.mobile-menu.open a:nth-child(5){transition-delay:.43s}
+.mobile-menu a:hover{color:var(--ink);}
+.mobile-menu a small{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);letter-spacing:.15em;}
+
+/* ═══════════════ HERO ═══════════════ */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 0 5.5rem;position:relative;
+}
+.hero-top{flex:1;display:flex;align-items:center;padding-top:6rem;}
+.hero-label{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  width:100%;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:.8rem 0;
+}
+.avail{display:flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);}
+.avail .dot{width:7px;height:7px;border-radius:50%;background:#4ade80;position:relative;}
+.avail .dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(74,222,128,.4);animation:pulse 2.2s infinite;}
+@keyframes pulse{0%{transform:scale(.7);opacity:1}80%{transform:scale(1.7);opacity:0}100%{opacity:0}}
+
+.hero-name{margin-top:2.2rem;}
+.hero-name .line{overflow:hidden;}
+.hero-name .line span{
+  display:block;transform:translateY(110%);
+  animation:riseUp 1.15s var(--ease) forwards;
+}
+.hero-name .line:nth-child(2) span{animation-delay:.12s;}
+@keyframes riseUp{to{transform:translateY(0);}}
+.hero-name h1{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:clamp(3.6rem,12.5vw,11.5rem);line-height:.92;letter-spacing:-.025em;
+}
+.hero-roles{
+  display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.8rem;
+  opacity:0;animation:fadeIn 1s var(--ease) .7s forwards;
+}
+@keyframes fadeIn{to{opacity:1}}
+.hero-roles .role{
+  font-family:var(--font-display);font-size:clamp(1rem,2.4vw,1.5rem);font-weight:400;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--ink-dim);
+  display:flex;align-items:center;gap:1.2rem;
+}
+.hero-roles .role:not(:last-child)::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;opacity:.85;}
+.hero-bottom{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2.5rem;flex-wrap:wrap;
+  margin-top:3.2rem;opacity:0;animation:fadeIn 1s var(--ease) .95s forwards;
+}
+.hero-sub{max-width:26ch;color:var(--ink-dim);font-size:1.02rem;}
+.hero-sub strong{color:var(--ink);font-weight:500;}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:1rem 1.7rem;border-radius:99px;transition:transform .35s var(--ease),background .4s,color .4s,border-color .4s;
+  will-change:transform;
+}
+.btn-primary{background:var(--ink);color:var(--bg);}
+.btn-primary:hover{background:var(--accent);color:#0a0a0b;}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);}
+.btn-ghost:hover{border-color:var(--ink);}
+.scroll-hint{
+  position:absolute;right:0;bottom:5.5rem;display:flex;flex-direction:column;align-items:center;gap:.8rem;
+  opacity:0;animation:fadeIn 1s var(--ease) 1.4s forwards;
+}
+.scroll-hint .track{width:1px;height:56px;background:var(--line);overflow:hidden;position:relative;}
+.scroll-hint .track::after{content:'';position:absolute;top:-40%;left:0;width:1px;height:40%;background:var(--accent);animation:drip 2s var(--ease) infinite;}
+@keyframes drip{to{top:110%}}
+@media (max-width:900px){.scroll-hint{display:none;}}
+
+/* ═══════════════ SECTION SHELL ═══════════════ */
+section{padding:7.5rem 0;position:relative;}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;margin-bottom:3.5rem;padding-bottom:1.4rem;border-bottom:1px solid var(--line);}
+.sec-title{font-family:var(--font-display);font-weight:500;text-transform:uppercase;font-size:clamp(1.6rem,4vw,3rem);letter-spacing:-.01em;line-height:1;}
+
+/* ═══════════════ 01 ABOUT ═══════════════ */
+.about-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:5rem;align-items:start;}
+.about-headline{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:clamp(2.6rem,6.5vw,5.6rem);line-height:1.02;letter-spacing:-.02em;margin-bottom:2.6rem;
+}
+.about-headline em{font-style:normal;color:var(--ink-faint);}
+.about-copy p{color:var(--ink-dim);font-size:1.08rem;max-width:56ch;margin-bottom:1.4rem;}
+.about-copy p strong{color:var(--ink);font-weight:500;}
+.about-meta{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);}
+.about-meta .row{display:flex;justify-content:space-between;padding:1.05rem 0;border-bottom:1px solid var(--line);}
+.about-figure{position:relative;margin-top:.6rem;}
+.ph{
+  position:relative;border:1px solid var(--line);background:var(--bg-card);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.9rem;text-align:center;overflow:hidden;min-height:420px;
+}
+.ph .ph-icon{font-family:var(--font-display);font-size:2.2rem;color:var(--ink-faint);font-weight:500;}
+.ph .ph-note{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);max-width:26ch;line-height:1.9;}
+.ph::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,transparent 0 14px,var(--line-soft) 14px 15px);
+  opacity:.5;
+}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;}
+.about-figure .fig-tag{
+  position:absolute;top:1rem;left:1rem;z-index:3;background:rgba(10,10,11,.7);backdrop-filter:blur(6px);
+  padding:.4rem .8rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim);
+}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr;gap:3rem;}}
+
+/* ═══════════════ 02 EXPERTISE ═══════════════ */
+.skill-row{
+  display:grid;grid-template-columns:5rem 1fr auto;align-items:center;gap:2rem;
+  padding:2.3rem 0;border-bottom:1px solid var(--line);position:relative;cursor:default;
+  transition:padding .5s var(--ease);
+}
+.skill-row:first-of-type{border-top:1px solid var(--line);}
+.skill-num{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.15em;color:var(--ink-faint);transition:color .4s;}
+.skill-name{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:clamp(1.7rem,5vw,3.8rem);letter-spacing:-.015em;line-height:1;
+  transition:transform .55s var(--ease),color .4s;
+}
+.skill-tag{
+  font-family:var(--font-mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-faint);text-align:right;transition:color .4s;
+}
+.skill-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent-soft);
+  transition:width .6s var(--ease);z-index:-1;
+}
+.skill-row:hover{padding-left:1.6rem;}
+.skill-row:hover::before{width:100%;}
+.skill-row:hover .skill-num{color:var(--accent);}
+.skill-row:hover .skill-name{transform:translateX(.4rem);color:#fff;}
+.skill-row:hover .skill-tag{color:var(--ink-dim);}
+@media (max-width:700px){.skill-row{grid-template-columns:2.6rem 1fr;}.skill-tag{display:none;}}
+
+/* ═══════════════ 03 SELECTED EDITS ═══════════════ */
+.edits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.2rem;}
+.edit-card{cursor:pointer;position:relative;}
+.edit-card.wide{grid-column:span 2;}
+.edit-frame{
+  position:relative;overflow:hidden;background:var(--bg-card);
+  aspect-ratio:16/9;border:1px solid var(--line-soft);
+  transition:border-color .5s;
+}
+.edit-frame video, .edit-frame .v Poster{
+  width:100%;height:100%;object-fit:cover;position:absolute;inset:0;
+  transition:transform .8s var(--ease),opacity .5s;
+}
+.edit-card:hover .edit-frame{border-color:var(--line);}
+.edit-card:hover .edit-frame video, .edit-card:hover .edit-frame img{transform:scale(1.045);}
+.edit-play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;
+  opacity:0;transition:opacity .45s;background:rgba(10,10,11,.28);
+}
+.edit-card:hover .edit-play{opacity:1;}
+.play-ring{
+  width:64px;height:64px;border-radius:50%;border:1px solid rgba(244,244,245,.55);
+  display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);
+  transition:transform .45s var(--ease),background .4s;
+}
+.edit-card:hover .play-ring{transform:scale(1.08);background:rgba(143,129,248,.22);}
+.play-ring svg{width:16px;height:16px;fill:var(--ink);}
+.edit-cat{
+  position:absolute;top:1rem;left:1rem;z-index:3;
+  font-family:var(--font-mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+  background:rgba(10,10,11,.72);backdrop-filter:blur(6px);padding:.38rem .75rem;color:var(--ink-dim);
+}
+.edit-info{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;padding:1.2rem .2rem .4rem;}
+.edit-title{font-family:var(--font-display);font-weight:500;text-transform:uppercase;font-size:clamp(1.15rem,2.4vw,1.7rem);letter-spacing:-.01em;transition:color .4s;}
+.edit-card:hover .edit-title{color:var(--accent);}
+.edit-year{font-family:var(--font-mono);font-size:.66rem;color:var(--ink-faint);letter-spacing:.12em;}
+.edit-desc{color:var(--ink-faint);font-size:.92rem;max-width:52ch;padding:0 .2rem;}
+.edit-watch{
+  display:inline-flex;align-items:center;gap:.55rem;margin-top:.9rem;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);
+  transition:color .35s,gap .35s;
+}
+.edit-card:hover .edit-watch{color:var(--ink);gap:.9rem;}
+.ph-video{min-height:unset;aspect-ratio:16/9;position:absolute;inset:0;}
+@media (max-width:820px){.edits-grid{grid-template-columns:1fr;}.edit-card.wide{grid-column:span 1;}}
+
+/* ————— fullscreen video modal ————— */
+.modal{
+  position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;
+  background:rgba(7,7,8,.94);backdrop-filter:blur(10px);
+  opacity:0;pointer-events:none;transition:opacity .45s var(--ease);
+  padding:2rem;
+}
+.modal.open{opacity:1;pointer-events:auto;}
+.modal-inner{width:min(1100px,100%);max-height:calc(100svh - 4rem);display:flex;flex-direction:column;gap:1rem;transform:translateY(20px) scale(.985);transition:transform .5s var(--ease);}
+.modal.open .modal-inner{transform:none;}
+.modal video{width:100%;max-height:72svh;background:#000;border:1px solid var(--line-soft);}
+.modal-meta{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;flex-wrap:wrap;}
+.modal-title{font-family:var(--font-display);font-size:1.4rem;font-weight:500;text-transform:uppercase;}
+.modal-meta .mono-label{color:var(--accent);}
+.modal-close{
+  position:absolute;top:1.6rem;right:2rem;font-family:var(--font-mono);font-size:.66rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);
+  display:flex;align-items:center;gap:.6rem;transition:color .3s;padding:.5rem;
+}
+.modal-close:hover{color:var(--ink);}
+
+/* ═══════════════ 05 DIGITAL GROWTH ═══════════════ */
+.growth-headline{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:clamp(2.2rem,6vw,5rem);line-height:1.04;letter-spacing:-.02em;margin-bottom:3.2rem;
+}
+.growth-headline em{font-style:normal;color:var(--ink-faint);}
+.growth-grid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);}
+.growth-cell{
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:2.2rem 1.6rem;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;
+  transition:background .5s var(--ease);position:relative;overflow:hidden;
+}
+.growth-cell::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease);
+}
+.growth-cell:hover{background:var(--bg-elev);}
+.growth-cell:hover::before{transform:scaleX(1);}
+.growth-cell .idx{font-family:var(--font-mono);font-size:.62rem;color:var(--ink-faint);letter-spacing:.15em;}
+.growth-cell h3{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:1.25rem;letter-spacing:-.01em;margin:1.2rem 0 .5rem;
+}
+.growth-cell p{color:var(--ink-faint);font-size:.85rem;line-height:1.55;}
+@media (max-width:1000px){.growth-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.growth-grid{grid-template-columns:1fr;}}
+
+/* ═══════════════ 06 PROCESS ═══════════════ */
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;}
+.step{
+  border-top:1px solid var(--line);padding-top:1.6rem;position:relative;
+  transition:border-color .5s;
+}
+.step::before{
+  content:'';position:absolute;top:-1px;left:0;height:1px;width:0;background:var(--accent);
+  transition:width .7s var(--ease);
+}
+.step:hover{border-top-color:transparent;}
+.step:hover::before{width:100%;}
+.step .num{
+  font-family:var(--font-display);font-size:2.6rem;font-weight:400;color:transparent;
+  -webkit-text-stroke:1px var(--ink-faint);transition:color .5s,-webkit-text-stroke-color .5s;
+}
+.step:hover .num{color:var(--accent);-webkit-text-stroke-color:var(--accent);}
+.step h3{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:1.35rem;margin:1.1rem 0 .55rem;letter-spacing:-.01em;
+}
+.step p{color:var(--ink-faint);font-size:.9rem;line-height:1.6;}
+@media (max-width:1000px){.process-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.process-grid{grid-template-columns:1fr;}}
+
+/* ═══════════════ STATEMENT ═══════════════ */
+.statement{text-align:center;padding:9rem 0;}
+.statement h2{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:clamp(3rem,10vw,9rem);line-height:.98;letter-spacing:-.03em;
+}
+.statement h2 .word{display:inline-block;overflow:hidden;vertical-align:bottom;}
+.statement h2 .word span{display:inline-block;transform:translateY(110%);transition:transform 1.1s var(--ease);}
+.statement.in h2 .word:nth-child(1) span{transition-delay:.05s}
+.statement.in h2 .word:nth-child(2) span{transition-delay:.16s}
+.statement.in h2 .word:nth-child(3) span{transition-delay:.27s}
+.statement.in h2 .word span{transform:none;}
+.statement p{color:var(--ink-dim);max-width:52ch;margin:2.4rem auto 0;font-size:1.08rem;}
+.statement p em{font-style:normal;color:var(--accent);}
+
+/* ═══════════════ 07 CONTACT ═══════════════ */
+.contact-head{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;
+  font-size:clamp(2.8rem,9vw,7.5rem);line-height:.96;letter-spacing:-.025em;margin-bottom:4rem;
+}
+.contact-head em{font-style:normal;color:var(--ink-faint);}
+.contact-list{border-top:1px solid var(--line);}
+.contact-item{
+  display:grid;grid-template-columns:8rem 1fr auto;align-items:center;gap:2rem;
+  padding:2rem 0;border-bottom:1px solid var(--line);transition:padding .5s var(--ease);
+  position:relative;
+}
+.contact-item:hover{padding-left:1.4rem;}
+.contact-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent-soft);
+  transition:width .55s var(--ease);z-index:-1;
+}
+.contact-item:hover::before{width:100%;}
+.contact-item .c-label{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);}
+.contact-item .c-value{
+  font-family:var(--font-display);font-weight:400;font-size:clamp(1.2rem,3.4vw,2.3rem);
+  letter-spacing:-.01em;transition:color .4s;word-break:break-all;
+}
+.contact-item:hover .c-value{color:var(--accent);}
+.contact-item .c-arrow{font-family:var(--font-mono);color:var(--ink-faint);font-size:1rem;transition:transform .45s var(--ease),color .4s;}
+.contact-item:hover .c-arrow{transform:translate(6px,-6px);color:var(--ink);}
+.contact-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-top:3.2rem;}
+@media (max-width:700px){.contact-item{grid-template-columns:1fr auto;}.contact-item .c-label{grid-column:1/-1;margin-bottom:.2rem;}}
+
+/* ═══════════════ FOOTER ═══════════════ */
+footer{border-top:1px solid var(--line);padding:2.2rem 0;}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.foot .mono-label a{color:var(--ink-dim);transition:color .3s;}
+.foot .mono-label a:hover{color:var(--accent);}
+.to-top{
+  font-family:var(--font-mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-dim);display:inline-flex;gap:.6rem;align-items:center;transition:color .3s;
+}
+.to-top:hover{color:var(--ink);}
+
+/* focus states for keyboard users */
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px;}
+
+/* ————— reduced motion ————— */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important;}
+  html{scroll-behavior:auto;}
+  .rv{opacity:1;transform:none;}
+  .hero-name .line span{transform:none;}
+  .hero-roles,.hero-bottom,.scroll-hint{opacity:1;}
+  .statement h2 .word span{transform:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav" class="wrap-wide" style="padding-left:max(1.25rem,calc((100% - 1600px)/2));padding-right:max(1.25rem,calc((100% - 1600px)/2));width:100%;">
+  <a class="logo" href="#top" aria-label="Subham Kumar — home">SK<span>.</span></a>
+  <div class="nav-links" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#work">Work</a>
+    <a class="nav-cta" href="#contact">Let's Connect ↗</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"><small>01</small>About</a>
+  <a href="#expertise"><small>02</small>Expertise</a>
+  <a href="#work"><small>03</small>Work</a>
+  <a href="#contact"><small>07</small>Contact</a>
+</div>
+
+<main id="top">
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero wrap-wide">
+  <div class="hero-top">
+    <div class="hero-label">
+      <span class="mono-label">Creative Digital Professional</span>
+      <span class="avail"><span class="dot"></span>Available for selected projects</span>
+    </div>
+  </div>
+  <div class="hero-name" aria-label="Subham Kumar">
+    <div class="line"><span><h1>Subham</h1></span></div>
+    <div class="line"><span><h1>Kumar</h1></span></div>
+  </div>
+  <div class="hero-roles">
+    <span class="role">Editor</span>
+    <span class="role">Developer</span>
+    <span class="role">Creative</span>
+  </div>
+  <div class="hero-bottom">
+    <p class="hero-sub">I create <strong>visual stories</strong>, digital experiences and growth-focused creative work.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary magnetic" href="#work">View My Work ↘</a>
+      <a class="btn btn-ghost magnetic" href="#contact">Let's Connect ↗</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span class="mono-label">Scroll</span><span class="track"></span></div>
+</header>
+
+<!-- ══════════ 01 ABOUT ══════════ -->
+<section id="about" class="wrap">
+  <div class="sec-head rv">
+    <span class="section-num">01 / About</span>
+    <span class="mono-label">Who I Am</span>
+  </div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-headline rv">Creative<br>Thinking<span class="rv">.</span><br><em>Digital</em><br><em>Execution.</em></h2>
+      <div class="about-copy rv rv-d1">
+        <p>I'm <strong>Subham Kumar</strong>, a creative digital professional working across <strong>video editing, web development, web design and digital marketing</strong>.</p>
+        <p>I enjoy combining creativity, technology and business thinking — shaping ideas into visuals, visuals into experiences, and experiences into growth.</p>
+      </div>
+      <div class="about-meta rv rv-d2" style="margin-top:2.6rem;">
+        <div class="row"><span class="mono-label">Discipline</span><span class="mono-label" style="color:var(--ink-dim);">Video · Web · Design · Marketing</span></div>
+        <div class="row"><span class="mono-label">Based In</span><span class="mono-label" style="color:var(--ink-dim);">India</span></div>
+        <div class="row"><span class="mono-label">Status</span><span class="mono-label" style="color:var(--ink-dim);">Open to selected projects</span></div>
+      </div>
+    </div>
+    <div class="about-figure rv rv-d2">
+      <!-- PLACEHOLDER → public/images/profile/ · replace src in SITE_DATA.images.profile -->
+      <div class="ph" data-ph="profile">
+        <span class="ph-icon">SK.</span>
+        <span class="ph-note">Profile Image<br>→ public/images/profile/<br>Drop your photo here</span>
+      </div>
+      <span class="fig-tag">Subham Kumar — 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 02 EXPERTISE ══════════ -->
+<section id="expertise" class="wrap">
+  <div class="sec-head rv">
+    <span class="section-num">02 / Expertise</span>
+    <span class="mono-label">What I Do</span>
+  </div>
+  <h2 class="about-headline rv" style="margin-bottom:3.5rem;font-size:clamp(2.2rem,5.5vw,4.6rem);">Five Disciplines.<br><em>One Standard.</em></h2>
+  <div>
+    <div class="skill-row rv"><span class="skill-num">/ 01</span><span class="skill-name">Video Editing</span><span class="skill-tag">Stories in motion</span></div>
+    <div class="skill-row rv rv-d1"><span class="skill-num">/ 02</span><span class="skill-name">Web Development</span><span class="skill-tag">Building the experience</span></div>
+    <div class="skill-row rv rv-d2"><span class="skill-num">/ 03</span><span class="skill-name">Web Design</span><span class="skill-tag">Form meets function</span></div>
+    <div class="skill-row rv rv-d3"><span class="skill-num">/ 04</span><span class="skill-name">Digital Marketing</span><span class="skill-tag">Growth-focused creative</span></div>
+    <div class="skill-row rv rv-d4"><span class="skill-num">/ 05</span><span class="skill-name">Trading</span><span class="skill-tag">Personal interest &amp; skill area</span></div>
+  </div>
+</section>
+
+<!-- ══════════ 03 SELECTED EDITS ══════════ -->
+<section id="work" class="wrap">
+  <div class="sec-head rv">
+    <span class="section-num">03 / Selected Edits</span>
+    <span class="mono-label">Editing Work</span>
+  </div>
+  <h2 class="about-headline rv" style="margin-bottom:3.5rem;font-size:clamp(2.2rem,5.5vw,4.6rem);">Frame<br>by <em>Frame.</em></h2>
+  <div class="edits-grid" id="editsGrid">
+    <!-- video projects render here from SITE_DATA.videos -->
+    <noscript><p style="color:var(--ink-dim);">Enable JavaScript to view the editing portfolio.</p></noscript>
+  </div>
+  <p class="mono-label rv" style="margin-top:2.4rem;">New edits are added here automatically — just drop a file in public/editing-work/ and add one entry in the site data.</p>
+</section>
+
+<!-- ══════════ 05 DIGITAL GROWTH ══════════ -->
+<section id="growth" class="wrap">
+  <div class="sec-head rv">
+    <span class="section-num">05 / Digital Growth</span>
+    <span class="mono-label">Marketing</span>
+  </div>
+  <h2 class="growth-headline rv">Attention is earned.<br><em>Design earns it.</em></h2>
+  <div class="growth-grid">
+    <div class="growth-cell rv"><span class="idx">G·01</span><div><h3>Content</h3><p>Content designed to be watched, read and remembered — crafted around the idea, not the algorithm.</p></div></div>
+    <div class="growth-cell rv rv-d1"><span class="idx">G·02</span><div><h3>Social Media</h3><p>Consistent, intentional presence across platforms — building recognition one post at a time.</p></div></div>
+    <div class="growth-cell rv rv-d2"><span class="idx">G·03</span><div><h3>Brand Growth</h3><p>Clear identity, sharp messaging and a voice people actually connect with.</p></div></div>
+    <div class="growth-cell rv rv-d3"><span class="idx">G·04</span><div><h3>Creative Strategy</h3><p>Every creative decision tied to a direction — thinking before making, measuring after.</p></div></div>
+    <div class="growth-cell rv rv-d4"><span class="idx">G·05</span><div><h3>Digital Presence</h3><p>Websites, profiles and campaigns working together as one coherent presence.</p></div></div>
+  </div>
+</section>
+
+<!-- ══════════ 06 PROCESS ══════════ -->
+<section id="process" class="wrap">
+  <div class="sec-head rv">
+    <span class="section-num">06 / Process</span>
+    <span class="mono-label">How I Work</span>
+  </div>
+  <h2 class="about-headline rv" style="margin-bottom:3.5rem;font-size:clamp(2.2rem,5.5vw,4.6rem);">Four Stages.<br><em>Zero Shortcuts.</em></h2>
+  <div class="process-grid">
+    <div class="step rv"><span class="num">01</span><h3>Discover</h3><p>Understand the idea — the story, the audience, the goal behind the project.</p></div>
+    <div class="step rv rv-d1"><span class="num">02</span><h3>Strategize</h3><p>Define the direction — the tone, the structure, the plan before the first pixel.</p></div>
+    <div class="step rv rv-d2"><span class="num">03</span><h3>Create</h3><p>Build the final experience — edit, design and code brought together.</p></div>
+    <div class="step rv rv-d3"><span class="num">04</span><h3>Refine</h3><p>Polish every detail — iteration until it feels effortless.</p></div>
+  </div>
+</section>
+
+<!-- ══════════ STATEMENT ══════════ -->
+<section class="statement rv" id="statement">
+  <h2 aria-label="Discipline Creates Difference.">
+    <span class="word"><span>Discipline</span></span><br>
+    <span class="word"><span>Creates</span></span><br>
+    <span class="word"><span>Difference.</span></span>
+  </h2>
+  <p>In creative work, development and fitness, progress comes from <em>showing up consistently</em> and improving every day.</p>
+</section>
+
+<!-- ══════════ 07 CONTACT ══════════ -->
+<section id="contact" class="wrap">
+  <div class="sec-head rv">
+    <span class="section-num">07 / Let's Work Together</span>
+    <span class="mono-label">Get In Touch</span>
+  </div>
+  <h2 class="contact-head rv">Have an<br><em>Idea?</em><br>Let's Build It.</h2>
+  <div class="contact-list">
+    <a class="contact-item rv" href="tel:9341325578">
+      <span class="c-label">Phone</span>
+      <span class="c-value">93413 25578</span>
+      <span class="c-arrow">↗</span>
+    </a>
+    <a class="contact-item rv rv-d1" href="mailto:subhamkr62041@gmail.com">
+      <span class="c-label">Email</span>
+      <span class="c-value">subhamkr62041@gmail.com</span>
+      <span class="c-arrow">↗</span>
+    </a>
+    <a class="contact-item rv rv-d2" href="https://instagram.com/im_subham5" target="_blank" rel="noopener">
+      <span class="c-label">Instagram</span>
+      <span class="c-value">@im_subham5</span>
+      <span class="c-arrow">↗</span>
+    </a>
+  </div>
+  <div class="contact-ctas rv rv-d3">
+    <a class="btn btn-primary magnetic" href="tel:9341325578">Call Me ↗</a>
+    <a class="btn btn-ghost magnetic" href="mailto:subhamkr62041@gmail.com">Email Me ↗</a>
+    <a class="btn btn-ghost magnetic" href="https://instagram.com/im_subham5" target="_blank" rel="noopener">Instagram ↗</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="mono-label">© <span id="year">2026</span> Subham Kumar — All rights reserved</span>
+    <span class="mono-label">Designed &amp; built with discipline</span>
+    <a class="to-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<!-- ══════════ VIDEO MODAL ══════════ -->
+<div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video viewer">
+  <button class="modal-close" id="modalClose">Close ✕ <span class="mono-label">(Esc)</span></button>
+  <div class="modal-inner">
+    <video id="modalVideo" controls playsinline preload="metadata"></video>
+    <div class="modal-meta">
+      <span class="modal-title" id="modalTitle">Project</span>
+      <span class="mono-label" id="modalMeta">Category — Year</span>
+    </div>
+    <p style="color:var(--ink-dim);font-size:.92rem;" id="modalDesc"></p>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   ★ SITE DATA — EDIT THIS SECTION ONLY TO UPDATE CONTENT ★
+   ════════════════════════════════════════════════════════════════════
+
+   HOW TO ADD AN EDITING VIDEO:
+   1. Put the video file in:  public/editing-work/
+   2. Copy one block below, and set:
+        src:    "public/editing-work/your-video.mp4"
+        poster: "public/images/projects/cover.jpg" (optional frame image)
+   3. Reload the site. Done — the grid rebuilds itself.
+
+   HOW TO ADD A WEB PROJECT:
+   1. Put a screenshot in:  public/images/projects/
+   2. Add a block in `projects` with image: "public/images/projects/shot.png"
+
+   HOW TO REPLACE PERSONAL IMAGES:
+   profile: public/images/profile/photo.jpg
+   ════════════════════════════════════════════════════════════════════ */
+
+const SITE_DATA = {
+
+  images: {
+    profile: "https://base44.app/api/apps/6a8042b69dd7c76606389a08/files/mp/public/6a8042b69dd7c76606389a08/509d85b37_8f091b44b_whatsapp_image_2121936295087850.jpg"
+  },
+
+  // ————— SELECTED EDITS (video portfolio) —————
+  videos: [
+    {
+      title: "Showreel Cut — 2026",
+      category: "Video Editing",
+      year: "2026",
+      desc: "Original edit by Subham Kumar — rhythm, pacing and color treated frame by frame.",
+      src: "https://base44.app/api/apps/6a8042b69dd7c76606389a08/files/mp/public/6a8042b69dd7c76606389a08/123c16a65_03480bcb4_lv_0_20260910114631.mp4",
+      poster: "https://base44.app/api/apps/6a8042b69dd7c76606389a08/files/mp/public/6a8042b69dd7c76606389a08/0983d3da3_edit-still-1.jpeg"
+    },
+    {
+      title: "Retail Brand Promo — Computer House",
+      category: "Video Editing",
+      year: "2026",
+      desc: "Vertical retail promo reel — on-camera presenter, store walkthrough, animated text overlays and a branded outro card.",
+      src: "https://base44.app/api/apps/6a8042b69dd7c76606389a08/files/mp/public/6a8042b69dd7c76606389a08/48822af71_c79eec7e1_video_1771146774088261.mp4",
+      poster: "https://base44.app/api/apps/6a8042b69dd7c76606389a08/files/mp/public/6a8042b69dd7c76606389a08/0983d3da3_edit-still-1.jpeg"
+    },
+    {
+      title: "Retail Promo — Lenovo Store Walkthrough",
+      category: "Video Editing",
+      year: "2026",
+      desc: "Vertical retail promo reel — on-camera presenter, in-store product walkthrough and animated text overlays.",
+      src: "https://base44.app/api/apps/6a8042b69dd7c76606389a08/files/mp/public/6a8042b69dd7c76606389a08/68828a5af_4f3cb7329_video_1635393404839257.mp4",
+      poster: "https://base44.app/api/apps/6a8042b69dd7c76606389a08/files/mp/public/6a8042b69dd7c76606389a08/a672fd84a_edit-still-2.jpeg"
+    }
+  ],
+
+  contact: {
+    phone: "tel:9341325578",
+    email: "mailto:subhamkr62041@gmail.com",
+    instagram: "https://instagram.com/im_subham5"
+  }
+};
+
+/* ══════════════════════════ RENDER ══════════════════════════ */
+(function(){
+  const $ = (s,c=document)=>c.querySelector(s);
+  const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* — placeholder for profile image — */
+  $$('[data-ph]').forEach(el=>{
+    if(el.dataset.ph === 'profile' && SITE_DATA.images.profile){
+      const img=document.createElement('img'); img.src=SITE_DATA.images.profile; img.alt='Subham Kumar'; img.loading='lazy'; el.appendChild(img);
+    }
+  });
+
+  /* — video portfolio — */
+  const grid = $('#editsGrid');
+  const svgPlay = '<svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5-9-5.5z"/></svg>';
+  SITE_DATA.videos.forEach((v,i)=>{
+    const card = document.createElement('article');
+    card.className = 'edit-card rv' + (v.featured?' wide':'');
+    card.innerHTML = `
+      <div class="edit-frame">
+        <span class="edit-cat">${v.category}</span>
+        ${v.src ? `<video src="${v.src}" ${v.poster?`poster="${v.poster}"`:''} muted preload="metadata" playsinline></video>` : (v.poster ? `
+          <img src="${v.poster}" alt="${v.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <span class="edit-cat" style="left:auto;right:1rem;background:rgba(143,129,248,.22);color:#fff;">Full edit — coming soon</span>` : `
+          <div class="ph ph-video">
+            <span class="ph-icon" style="position:relative;z-index:3;">▶</span>
+            <span class="ph-note" style="position:relative;z-index:3;">Video will be added<br>→ public/editing-work/</span>
+          </div>`)}
+        <div class="edit-play"><span class="play-ring">${svgPlay}</span></div>
+      </div>
+      <div class="edit-info">
+        <h3 class="edit-title">${String(i+1).padStart(2,'0')} — ${v.title}</h3>
+        <span class="edit-year">${v.year}</span>
+      </div>
+      <p class="edit-desc">${v.desc}</p>
+      <span class="edit-watch">Watch Project ↗</span>`;
+    if(v.src){
+      card.addEventListener('click', ()=>openModal(v));
+      const vid = card.querySelector('video');
+      card.addEventListener('mouseenter', ()=>{ if(!reduceMotion) vid.play().catch(()=>{}); });
+      card.addEventListener('mouseleave', ()=>{ vid.pause(); vid.currentTime = 0; });
+    } else if(v.poster){
+      card.addEventListener('click', ()=>openStillModal(v));
+    }
+    grid.appendChild(card);
+  });
+
+  /* — fullscreen video modal — */
+  const modal = $('#videoModal'), mVideo = $('#modalVideo');
+  let lastFocus = null;
+  function openModal(v){
+    lastFocus = document.activeElement;
+    mVideo.style.display='';
+    mVideo.src = v.src;
+    $('#modalTitle').textContent = v.title;
+    $('#modalMeta').textContent = `${v.category} — ${v.year}`;
+    $('#modalDesc').textContent = v.desc;
+    modal.classList.add('open');
+    document.body.style.overflow='hidden';
+    mVideo.play().catch(()=>{});
+    $('#modalClose').focus();
+  }
+  function openStillModal(v){
+    lastFocus = document.activeElement;
+    mVideo.pause(); mVideo.removeAttribute('src'); mVideo.style.display='none';
+    let img = $('#modalStill');
+    if(!img){
+      img = document.createElement('img');
+      img.id = 'modalStill';
+      img.style.width='100%'; img.style.maxHeight='72svh'; img.style.objectFit='contain';
+      img.style.background='#000'; img.style.border='1px solid var(--line-soft)';
+      mVideo.parentNode.insertBefore(img, mVideo);
+    }
+    img.src = v.poster; img.alt = v.title; img.style.display='';
+    $('#modalTitle').textContent = v.title;
+    $('#modalMeta').textContent = `${v.category} — ${v.year} — Full edit coming soon`;
+    $('#modalDesc').textContent = v.desc;
+    modal.classList.add('open');
+    document.body.style.overflow='hidden';
+    $('#modalClose').focus();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow='';
+    mVideo.pause(); mVideo.removeAttribute('src'); mVideo.load(); mVideo.style.display='';
+    const img = $('#modalStill'); if(img) img.style.display='none';
+    if(lastFocus) lastFocus.focus();
+  }
+  $('#modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  addEventListener('keydown', e=>{ if(e.key==='Escape' && modal.classList.contains('open')) closeModal(); });
+
+  /* — scroll reveals — */
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  $$('.rv').forEach(el=>io.observe(el));
+  const st = $('#statement');
+  new IntersectionObserver((e,o)=>{ if(e[0].isIntersecting){ st.classList.add('in'); o.disconnect(); } },{threshold:.35}).observe(st);
+
+  /* — nav behavior — */
+  const nav = $('#nav');
+  const onScroll = ()=> nav.classList.toggle('scrolled', scrollY>40);
+  onScroll(); addEventListener('scroll', onScroll, {passive:true});
+
+  /* — mobile menu — */
+  const burger = $('#burger'), menu = $('#mobileMenu');
+  function setMenu(open){
+    burger.classList.toggle('open', open);
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', ()=>setMenu(!menu.classList.contains('open')));
+  $$('a', menu).forEach(a=>a.addEventListener('click', ()=>setMenu(false)));
+
+  /* — magnetic CTAs — */
+  if(!reduceMotion && matchMedia('(pointer:fine)').matches){
+    $$('.magnetic').forEach(btn=>{
+      btn.addEventListener('mousemove', e=>{
+        const r = btn.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width/2) * .28;
+        const y = (e.clientY - r.top - r.height/2) * .34;
+        btn.style.transform = `translate(${x}px,${y}px)`;
+      });
+      btn.addEventListener('mouseleave', ()=>{ btn.style.transform=''; });
+    });
+  }
+
+  /* — subtle hero parallax — */
+  if(!reduceMotion){
+    const name = $('.hero-name');
+    addEventListener('scroll', ()=>{
+      const y = Math.min(scrollY, innerHeight);
+      name.style.transform = `translateY(${y*.12}px)`;
+      name.style.opacity = Math.max(1 - y/(innerHeight*.9), 0);
+    }, {passive:true});
+  }
+
+  $('#year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
